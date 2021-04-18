@@ -23,7 +23,6 @@ module.exports = {
         "plugin:@typescript-eslint/recommended", // TypeScript rules
         "plugin:react/recommended", // React rules
         "plugin:react-hooks/recommended", // React hooks rules
-        "plugin:jsx-a11y/recommended", // Accessibility rules
       ],
       rules: {
         "prettier/prettier": ["error", {}, { usePrettierrc: true }], // Includes prettier rules
