@@ -1,0 +1,32 @@
+.quoteBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 260px;
+  padding: 20px;
+  margin: 0;
+  background: black;
+}
+.quoteText {
+  color: white;
+  font-size: clamp(18px, 4vw, 22px);
+  quotes: "“" "”" "‘" "’";
+}
+.quoteText::before {
+  content: open-quote;
+}
+.quoteText::after {
+  content: close-quote;
+}
+.quoteText::before,
+.quoteText::after {
+  font-size: clamp(22px, 6vw, 28px);
+  color: darkgray;
+}
+.quoteBlock figcaption {
+  color: darkgray;
+}
+.progressBar {
+  background: blue;
+}

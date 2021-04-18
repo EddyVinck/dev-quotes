@@ -14,6 +14,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 92%;
+}
+@media screen and (min-width: 768px) {
+  .main {
+    max-width: 740px;
+  }
 }
 
 .footer {
@@ -26,7 +32,7 @@
 }
 
 .footer img {
-  margin-left: 0.5rem;
+  margin: 0 0.5rem;
 }
 
 .footer a {
@@ -47,7 +53,7 @@
 }
 
 .title {
-  margin: 0;
+  margin: 0 0 4rem;
   line-height: 1.15;
   font-size: 4rem;
 }
