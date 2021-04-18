@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
+import { useTimer } from "../../hooks/useTimer";
 import styles from "./Quote.module.css";
 interface Props {
   fetchNewQuote: () => void;
@@ -6,36 +7,10 @@ interface Props {
 
 export const QuoteControls: React.FC<Props> = ({ fetchNewQuote }) => {
   const intervalRef = useRef<number>(null) as React.MutableRefObject<number>;
-  const [isTimerRunning, setIsTimerRunning] = useState(false);
-
-  useEffect(() => {
-    // Clear the interval when the component will unmount
-    return () => clearInterval(intervalRef.current);
-  }, []);
-
-  function stopLoopingQuotes(): void {
-    setIsTimerRunning(false);
-    clearInterval(intervalRef.current);
-    intervalRef.current = -1;
-  }
-
-  function toggleQuoteLoop(): void {
-    if (intervalRef.current && intervalRef.current !== -1) {
-      stopLoopingQuotes();
-      return;
-    }
-
-    // Don't make the user wait for the first iteration
-    if (isTimerRunning === false) {
-      fetchNewQuote();
-    }
-
-    setIsTimerRunning(true);
-    const interval = window.setInterval(() => {
-      fetchNewQuote();
-    }, 5000);
-    intervalRef.current = interval;
-  }
+  const { isTimerRunning, toggleLoop: toggleQuoteLoop } = useTimer(
+    intervalRef,
+    fetchNewQuote
+  );
 
   return (
     <div className={styles.quoteControls}>
