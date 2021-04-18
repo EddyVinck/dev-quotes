@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
 import { useQuery } from "react-query";
 import { QuoteResponse } from "../../pages/api/quote";
-import { QuoteControls } from "./QuoteControls";
+import { QuoteControls } from "../QuoteControls/QuoteControls";
 import { QuoteText } from "./QuoteText";
 
-function getQuote(): Promise<QuoteResponse> {
+async function getQuote(): Promise<QuoteResponse> {
   return fetch("/api/quote").then((res) => res.json());
 }
 
