@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useQuery } from "react-query";
 import { QuoteResponse } from "../../pages/api/quote";
+import { QuoteControls } from "./QuoteControls";
 import { QuoteText } from "./QuoteText";
 
 function getQuote(): Promise<QuoteResponse> {
@@ -8,15 +9,20 @@ function getQuote(): Promise<QuoteResponse> {
 }
 
 export const Quote: React.FC = () => {
-  const { data, isLoading, isError } = useQuery("quote", getQuote);
+  const { data, isLoading, isError, refetch } = useQuery("quote", getQuote);
+
+  const fetchNewQuote = useCallback(() => refetch(), [refetch]);
 
   if (isError) return <p>Error!</p>;
 
   return (
-    <QuoteText
-      quote={data?.quote}
-      author={data?.author}
-      isLoading={isLoading}
-    />
+    <div>
+      <QuoteText
+        quote={data?.quote}
+        author={data?.author}
+        isLoading={isLoading}
+      />
+      <QuoteControls fetchNewQuote={fetchNewQuote} />
+    </div>
   );
 };
