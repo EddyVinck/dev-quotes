@@ -1,5 +1,5 @@
 import React from "react";
-import { useTimer } from "../../hooks/useTimer";
+import { useProgress } from "../../hooks/useProgress";
 import styles from "./QuoteControls.module.css";
 import { QuoteProgress } from "../QuoteProgress/QuoteProgress";
 
@@ -9,14 +9,12 @@ interface Props {
 
 export const QuoteControls: React.FC<Props> = ({ fetchNewQuote }) => {
   const loopTime = 5000;
-  const { isTimerRunning, timeLeft, toggleLoop: toggleQuoteLoop } = useTimer(
+  const { isEnabled, timeLeft, toggleIsEnabled: toggleQuoteLoop } = useProgress(
     fetchNewQuote,
-    loopTime,
-    true
+    loopTime
   );
 
-  const progressValue =
-    isTimerRunning === false ? loopTime : loopTime - timeLeft;
+  const progressValue = isEnabled === false ? loopTime : loopTime - timeLeft;
 
   return (
     <div>
@@ -25,10 +23,10 @@ export const QuoteControls: React.FC<Props> = ({ fetchNewQuote }) => {
         <button onClick={fetchNewQuote}>New quote</button>
         <button
           onClick={toggleQuoteLoop}
-          aria-checked={isTimerRunning}
+          aria-checked={isEnabled}
           role="switch"
         >
-          Loop quotes ({isTimerRunning ? "on" : "off"})
+          Loop quotes ({isEnabled ? "on" : "off"})
         </button>
       </div>
     </div>
