@@ -5,10 +5,13 @@ import { QuoteProgress } from "../QuoteProgress/QuoteProgress";
 
 interface Props {
   fetchNewQuote: () => void;
+  loopTime?: number;
 }
 
-export const QuoteControls: React.FC<Props> = ({ fetchNewQuote }) => {
-  const loopTime = 8000;
+export const QuoteControls: React.FC<Props> = ({
+  fetchNewQuote,
+  loopTime = 8000,
+}) => {
   const {
     isEnabled: isLoopingQuotes,
     timeLeft,

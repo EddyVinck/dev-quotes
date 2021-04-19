@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { TestComponent } from "../test-utils/test-component/TestComponent";
+import { TestComponent } from "../../test-utils/test-component/TestComponent";
 
 describe("Jest is working as intended", () => {
   test("Jest can parse JSX and run assertions", () => {
