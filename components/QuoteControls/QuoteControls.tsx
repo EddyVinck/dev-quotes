@@ -9,24 +9,34 @@ interface Props {
 
 export const QuoteControls: React.FC<Props> = ({ fetchNewQuote }) => {
   const loopTime = 5000;
-  const { isEnabled, timeLeft, toggleIsEnabled: toggleQuoteLoop } = useProgress(
-    fetchNewQuote,
-    loopTime
-  );
+  const {
+    isEnabled: isLoopingQuotes,
+    timeLeft,
+    toggleIsEnabled: toggleQuoteLoop,
+  } = useProgress(fetchNewQuote, loopTime);
 
-  const progressValue = isEnabled === false ? loopTime : loopTime - timeLeft;
+  const progressValue =
+    isLoopingQuotes === false ? loopTime : loopTime - timeLeft;
+
+  const handleNewQuoteClick = (): void => {
+    if (!isLoopingQuotes) {
+      fetchNewQuote();
+    }
+  };
 
   return (
     <div>
       <QuoteProgress value={progressValue} max={loopTime} />
       <div className={styles.quoteControls}>
-        <button onClick={fetchNewQuote}>New quote</button>
+        <button onClick={handleNewQuoteClick} disabled={isLoopingQuotes}>
+          New quote
+        </button>
         <button
-          onClick={toggleQuoteLoop}
-          aria-checked={isEnabled}
+          onClick={() => toggleQuoteLoop()}
+          aria-checked={isLoopingQuotes}
           role="switch"
         >
-          Loop quotes ({isEnabled ? "on" : "off"})
+          Loop quotes ({isLoopingQuotes ? "on" : "off"})
         </button>
       </div>
     </div>

@@ -7,7 +7,7 @@ export function useProgress(
   isEnabled: boolean;
   isCallbackRunning: boolean;
   timeLeft: number;
-  toggleIsEnabled: () => void;
+  toggleIsEnabled: (overrideToggleValue?: boolean) => void;
 } {
   const promise = useCallback(() => Promise.resolve(callback()), [callback]);
   const [isEnabled, setIsEnabled] = useState(false);
@@ -21,10 +21,16 @@ export function useProgress(
     timeLeftIntervalRef.current = -1;
   }
 
-  function toggleIsEnabled(): void {
+  function toggleIsEnabled(overrideToggleValue?: boolean): void {
     clearTimerInterval();
-    setIsEnabled((prev) => !prev);
-    setIsTimerRunning((prev) => !prev);
+    setTimeLeft(loopTime);
+    const toggleValue =
+      typeof overrideToggleValue !== "undefined"
+        ? overrideToggleValue
+        : !isEnabled;
+
+    setIsEnabled(toggleValue);
+    setIsTimerRunning(toggleValue);
   }
 
   const pauseProgress = useCallback(() => {
