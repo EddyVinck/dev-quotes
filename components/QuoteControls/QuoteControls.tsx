@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const QuoteControls: React.FC<Props> = ({ fetchNewQuote }) => {
-  const loopTime = 5000;
+  const loopTime = 8000;
   const {
     isEnabled: isLoopingQuotes,
     timeLeft,
@@ -19,7 +19,7 @@ export const QuoteControls: React.FC<Props> = ({ fetchNewQuote }) => {
     isLoopingQuotes === false ? loopTime : loopTime - timeLeft;
 
   const handleNewQuoteClick = (): void => {
-    if (!isLoopingQuotes) {
+    if (isLoopingQuotes === false) {
       fetchNewQuote();
     }
   };
