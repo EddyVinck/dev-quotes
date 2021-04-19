@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useTimer } from "../../hooks/useTimer";
 import styles from "./QuoteControls.module.css";
 import { QuoteProgress } from "../QuoteProgress/QuoteProgress";
@@ -8,15 +8,19 @@ interface Props {
 }
 
 export const QuoteControls: React.FC<Props> = ({ fetchNewQuote }) => {
-  const intervalRef = useRef<number>(null) as React.MutableRefObject<number>;
-  const { isTimerRunning, toggleLoop: toggleQuoteLoop } = useTimer(
-    intervalRef,
-    fetchNewQuote
+  const loopTime = 5000;
+  const { isTimerRunning, timeLeft, toggleLoop: toggleQuoteLoop } = useTimer(
+    fetchNewQuote,
+    loopTime,
+    true
   );
+
+  const progressValue =
+    isTimerRunning === false ? loopTime : loopTime - timeLeft;
 
   return (
     <div>
-      <QuoteProgress value={60} max={100} />
+      <QuoteProgress value={progressValue} max={loopTime} />
       <div className={styles.quoteControls}>
         <button onClick={fetchNewQuote}>New quote</button>
         <button
