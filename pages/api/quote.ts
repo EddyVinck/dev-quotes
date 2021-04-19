@@ -4,10 +4,9 @@ export interface QuoteData {
   author: string;
   id: number;
   quote: string;
-  permalink: string;
 }
 
-export interface QuoteError extends Partial<QuoteData> {
+export interface QuoteError extends Pick<QuoteData, "author" | "quote" | "id"> {
   error: string;
 }
 
@@ -16,11 +15,12 @@ const quoteEndpoint = `${quoteBaseUrl}/random.json`;
 
 const ErrorQuote: QuoteError = {
   author: "Eddy Vinck",
-  quote: "This error could have been a quote",
+  quote: "This error could have been a quote, but an error occurred!",
   error: "Something went wrong!",
+  id: -1,
 };
 
-export type QuoteResponse = QuoteData | QuoteError;
+export type QuoteResponse = QuoteData & QuoteError;
 
 export default async (
   req: NextApiRequest,

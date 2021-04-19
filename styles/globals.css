@@ -26,3 +26,14 @@ a {
   white-space: nowrap;
   width: 1px;
 }
+
+@media (hover: none) {
+  .hover-only {
+    display: none;
+  }
+}
+@media (hover: hover) {
+  .touch-only {
+    display: none;
+  }
+}

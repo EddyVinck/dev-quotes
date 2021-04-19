@@ -1,0 +1,6 @@
+.container {
+  display: flex;
+}
+.container a {
+  margin-right: 8px;
+}

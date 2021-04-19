@@ -4,11 +4,9 @@ import styles from "./Quote.module.css";
 interface Props {
   quote?: string;
   author?: string;
-  isLoading: boolean;
 }
 
-export const QuoteText: React.FC<Props> = ({ quote, author, isLoading }) => {
-  if (isLoading) return <p>Loading...</p>;
+export const QuoteText: React.FC<Props> = ({ quote, author }) => {
   return (
     <figure className={styles.quoteBlock}>
       <blockquote className={styles.quoteText}>{quote}</blockquote>
