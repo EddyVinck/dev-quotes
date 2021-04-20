@@ -41,12 +41,12 @@ describe("Quote", () => {
   afterEach(() => {
     jest.useRealTimers();
   });
+  const queryClient = new QueryClient();
+  const MockQueryProvider: React.FC = ({ children }) => (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
 
   test("renders the loader when there is no initial data", async () => {
-    const queryClient = new QueryClient();
-    const MockQueryProvider: React.FC = ({ children }) => (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    );
     render(
       <MockQueryProvider>
         <Quote />
@@ -56,10 +56,6 @@ describe("Quote", () => {
   });
 
   test("renders with mocked data", async () => {
-    const queryClient = new QueryClient();
-    const MockQueryProvider: React.FC = ({ children }) => (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    );
     render(
       <MockQueryProvider>
         <Quote />
@@ -74,10 +70,6 @@ describe("Quote", () => {
     );
   });
   test('fetches a new quote when "new quote" is clicked', async () => {
-    const queryClient = new QueryClient();
-    const MockQueryProvider: React.FC = ({ children }) => (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    );
     render(
       <MockQueryProvider>
         <Quote />
@@ -100,12 +92,6 @@ describe("Quote", () => {
 
   describe("looping quotes", () => {
     test('continuously fetches a new quote when "loop quotes" is clicked', async () => {
-      const queryClient = new QueryClient();
-      const MockQueryProvider: React.FC = ({ children }) => (
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
-      );
       render(
         <MockQueryProvider>
           <Quote />
@@ -144,12 +130,6 @@ describe("Quote", () => {
     });
 
     test('"new quote" is disabled when "loop quotes" is enabled', async () => {
-      const queryClient = new QueryClient();
-      const MockQueryProvider: React.FC = ({ children }) => (
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
-      );
       render(
         <MockQueryProvider>
           <Quote />
