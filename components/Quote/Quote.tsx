@@ -1,15 +1,12 @@
 import React, { useCallback } from "react";
 import { useQuery } from "react-query";
-import { QuoteData, QuoteResponse } from "../../pages/api/quote";
+import { QuoteData } from "../../pages/api/quote";
 import { QuoteControls } from "../QuoteControls/QuoteControls";
 import { QuoteSocialSharing } from "../QuoteSocialSharing/QuoteSocialSharing";
+import { getQuote } from "./getQuote";
 import { QuoteText } from "./QuoteText";
 
-async function getQuote(): Promise<QuoteResponse> {
-  return fetch("/api/quote").then((res) => res.json());
-}
-
-function getSharingText(quote: string, author: string): string {
+export function getSharingText(quote: string, author: string): string {
   const newLine = "%0D";
   const hashtag = "%23";
   const sharingText = `"${quote}" ${newLine.repeat(
@@ -19,7 +16,9 @@ function getSharingText(quote: string, author: string): string {
 }
 
 export const Quote: React.FC = () => {
-  const { data, isLoading, isError, refetch } = useQuery("quote", getQuote);
+  const { data, isLoading, isError, refetch } = useQuery("quote", getQuote, {
+    refetchOnWindowFocus: false,
+  });
   const fetchNewQuote = useCallback(() => refetch(), [refetch]);
 
   if (isLoading) return <p>Loading...</p>;
