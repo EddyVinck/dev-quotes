@@ -42,24 +42,24 @@ describe("Quote", () => {
     jest.useRealTimers();
   });
   const queryClient = new QueryClient();
-  const MockQueryProvider: React.FC = ({ children }) => (
+  const MockReactQueryProvider: React.FC = ({ children }) => (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 
   test("renders the loader when there is no initial data", async () => {
     render(
-      <MockQueryProvider>
+      <MockReactQueryProvider>
         <Quote />
-      </MockQueryProvider>
+      </MockReactQueryProvider>
     );
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
   });
 
   test("renders with mocked data", async () => {
     render(
-      <MockQueryProvider>
+      <MockReactQueryProvider>
         <Quote />
-      </MockQueryProvider>
+      </MockReactQueryProvider>
     );
     await waitFor(() => expect(getQuote).toHaveBeenCalledTimes(1));
     const blockquote = screen.getByRole("figure");
@@ -71,9 +71,9 @@ describe("Quote", () => {
   });
   test('fetches a new quote when "new quote" is clicked', async () => {
     render(
-      <MockQueryProvider>
+      <MockReactQueryProvider>
         <Quote />
-      </MockQueryProvider>
+      </MockReactQueryProvider>
     );
     await waitFor(() => expect(getQuote).toHaveBeenCalledTimes(1));
 
@@ -93,9 +93,9 @@ describe("Quote", () => {
   describe("looping quotes", () => {
     test('continuously fetches a new quote when "loop quotes" is clicked', async () => {
       render(
-        <MockQueryProvider>
+        <MockReactQueryProvider>
           <Quote />
-        </MockQueryProvider>
+        </MockReactQueryProvider>
       );
 
       // First, toggle the looping (1 request)
@@ -131,9 +131,9 @@ describe("Quote", () => {
 
     test('"new quote" is disabled when "loop quotes" is enabled', async () => {
       render(
-        <MockQueryProvider>
+        <MockReactQueryProvider>
           <Quote />
-        </MockQueryProvider>
+        </MockReactQueryProvider>
       );
       await waitFor(() => expect(getQuote).toHaveBeenCalledTimes(1));
       userEvent.click(screen.getByText(/loop quotes/i));
