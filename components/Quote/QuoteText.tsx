@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./Quote.module.css";
 
 interface Props {
-  quote?: string;
-  author?: string;
+  quote: string;
+  author: string;
 }
 
 export const QuoteText: React.FC<Props> = ({ quote, author }) => {

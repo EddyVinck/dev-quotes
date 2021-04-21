@@ -4,6 +4,8 @@ import { QuoteData } from "../../pages/api/quote";
 import { QuoteControls } from "../QuoteControls/QuoteControls";
 import { QuoteSocialSharing } from "../QuoteSocialSharing/QuoteSocialSharing";
 import { getQuote } from "./getQuote";
+import { QuoteError } from "./QuoteError";
+import { QuoteLoading } from "./QuoteLoading";
 import { QuoteText } from "./QuoteText";
 
 export function getSharingText(quote: string, author: string): string {
@@ -16,24 +18,27 @@ export function getSharingText(quote: string, author: string): string {
 }
 
 export const Quote: React.FC = () => {
-  const { data, isLoading, isError, refetch } = useQuery("quote", getQuote, {
+  const { data, status, refetch } = useQuery("quote", getQuote, {
     refetchOnWindowFocus: false,
   });
   const fetchNewQuote = useCallback(() => refetch(), [refetch]);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError || (data && data.error)) return <p>Error!</p>;
-  if (!data) return <p>No data</p>;
+  if (status === "loading") return <QuoteLoading />;
+  if (status === "error" || (data && data.error)) return <QuoteError />;
+  if (status === "success" && data) {
+    const { quote, author } = data as QuoteData;
+    const sharingText = getSharingText(quote, author);
 
-  const { quote, author } = data as QuoteData;
-  const sharingText = getSharingText(quote, author);
+    return (
+      <div>
+        <QuoteText quote={quote} author={author} />
+        <QuoteControls fetchNewQuote={fetchNewQuote} />
+        <h2>Share on social media</h2>
+        <QuoteSocialSharing text={sharingText} />
+      </div>
+    );
+  }
 
-  return (
-    <div>
-      <QuoteText quote={quote} author={author} />
-      <QuoteControls fetchNewQuote={fetchNewQuote} />
-      <h2>Share on social media</h2>
-      <QuoteSocialSharing text={sharingText} />
-    </div>
-  );
+  // This code should never be reachable, since react-query's status will never be "idle" if you do not pass it the `enabled: false` option
+  throw new Error("Something went wrong.");
 };

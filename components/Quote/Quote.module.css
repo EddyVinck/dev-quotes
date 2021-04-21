@@ -9,9 +9,12 @@
   background: black;
 }
 .quoteText {
+  text-align: center;
   color: white;
   font-size: clamp(18px, 4vw, 22px);
   quotes: "“" "”" "‘" "’";
+  min-width: 820px;
+  max-width: 100%;
 }
 .quoteText::before {
   content: open-quote;

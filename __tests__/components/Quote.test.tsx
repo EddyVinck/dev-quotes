@@ -1,9 +1,10 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { QueryClient, QueryClientProvider } from "react-query";
+import * as ReactQuery from "react-query";
 import { getQuote } from "../../components/Quote/getQuote";
 import { Quote } from "../../components/Quote/Quote";
 import { QuoteResponse } from "../../pages/api/quote";
+const { QueryClient, QueryClientProvider } = ReactQuery;
 
 jest.mock("../../components/Quote/getQuote", () => {
   const mockGetQuote = jest.fn().mockResolvedValue({
@@ -138,6 +139,25 @@ describe("Quote", () => {
       await waitFor(() => expect(getQuote).toHaveBeenCalledTimes(1));
       userEvent.click(screen.getByText(/loop quotes/i));
       expect(screen.getByText(/new quote/i)).toBeDisabled();
+    });
+  });
+
+  // According to the react-query documentation:
+  // status: String
+  // Will be:
+  // idle if the query is idle. This only happens if a query is initialized with enabled: false and no initial data is available.
+  // So this test is just verification that that should never happen
+  // See: https://react-query.tanstack.com/reference/useQuery
+  test('useQuery should not be passed an `enabled: false` option because that would cause an unhandled status "idle" to become possible', async () => {
+    const useQuerySpy = jest.spyOn(ReactQuery, "useQuery");
+    render(
+      <MockReactQueryProvider>
+        <Quote />
+      </MockReactQueryProvider>
+    );
+    await waitFor(() => expect(getQuote).toHaveBeenCalledTimes(1));
+    expect(useQuerySpy).toHaveBeenCalledWith("quote", getQuote, {
+      refetchOnWindowFocus: false,
     });
   });
 });
