@@ -4,17 +4,22 @@
   align-items: center;
   flex-direction: column;
   min-height: 260px;
-  padding: 20px;
+  width: 100%;
+  max-width: 820px;
+  padding: 10px;
   margin: 0;
   background: black;
+}
+@media (min-width: 768px) {
+  .quoteBlock {
+    padding: 20px;
+  }
 }
 .quoteText {
   text-align: center;
   color: white;
   font-size: clamp(18px, 4vw, 22px);
   quotes: "“" "”" "‘" "’";
-  min-width: 820px;
-  max-width: 100%;
 }
 .quoteText::before {
   content: open-quote;
