@@ -2,9 +2,19 @@
 
 # Dev Quotes
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+What is Dev Quotes? It's a small project with a professional setup used to revisit NextJS and to try out some tools I had not tried before including CSS Modules and `react-query`. Everything is written in strict TypeScript, even the tests. It connects to a public API for the quotes. You can find the API here: http://quotes.stormconsultancy.co.uk/
 
-The project can be viewed live here: [https://devquotes.vercel.app/](https://devquotes.vercel.app/)
+The project can be viewed live here: [https://devquotes.vercel.app/](https://devquotes.vercel.app/) (version of `main` branch)
+
+
+## Table of contents
+- [Dev Quotes](#dev-quotes)
+  - [Table of contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+  - [Application features](#application-features)
+  - [Tests](#tests)
+  - [Tech used](#tech-used)
+    - [NextJS](#nextjs)
 
 ## Getting Started
 
@@ -60,6 +70,8 @@ React Testing Library has been used to mimic user interactions as much as possib
 - Lint Staged
 
 ### NextJS
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 To learn more about Next.js, take a look at the following resources:
 
