@@ -1,4 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Dev Quotes homepage](./.github/screenshots/dev-quotes-screenshot.png)
+
+# Dev Quotes
+
+What is Dev Quotes? It's a small project with a professional setup used to revisit NextJS and to try out some tools I had not tried before including CSS Modules and `react-query`. Everything is written in strict TypeScript, even the tests. It connects to a public API for the quotes. You can find the API here: http://quotes.stormconsultancy.co.uk/
+
+The project can be viewed live here: [https://devquotes.vercel.app/](https://devquotes.vercel.app/) (version of `main` branch)
+
+
+## Table of contents
+- [Dev Quotes](#dev-quotes)
+  - [Table of contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+  - [Application features](#application-features)
+  - [Tests](#tests)
+  - [Tech used](#tech-used)
+    - [NextJS](#nextjs)
 
 ## Getting Started
 
@@ -12,13 +28,50 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/quote](http://localhost:3000/api/quote). This endpoint can be edited in `pages/api/quote.ts`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+To run the tests:
+
+```bash
+npm test
+# or
+yarn test
+```
+
+## Application features
+
+- Fetch a single quote
+- Continuously fetch new quotes in a loop on a timer, indicated by a progress bar. Kind of like a slide show.
+- Share quotes on Twitter, Facebook or WhatsApp
+
+## Tests
+
+The tests can be found in the `__tests__` directory. The tests are also written in TypeScript.
+
+Jest features like fake timers and mocking have been used to skip timers and to mock requests.
+
+React Testing Library has been used to mimic user interactions as much as possible in the tests.
+
+## Tech used
+
+- TypeScript
+- ReactJS
+- NextJS
+- CSS modules
+- Jest
+- React Testing Library
+- react-share
+- Babel
+- ESLint
+- Prettier
+- Husky
+- Lint Staged
+
+### NextJS
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 To learn more about Next.js, take a look at the following resources:
 
@@ -26,8 +79,6 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
