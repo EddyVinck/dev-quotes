@@ -39,6 +39,6 @@ export const Quote: React.FC = () => {
     );
   }
 
-  // This code should never be reachable, since react-query's status will never be "idle" if you do not pass it the `enabled: false` option
+  // This code should never be reachable, since react-query's status will never be "idle" if you do not pass it the `enabled: false` option. There is a test to make sure of this.
   throw new Error("Something went wrong.");
 };
