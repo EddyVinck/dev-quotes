@@ -17,7 +17,7 @@ export const QuoteSocialSharing: React.FC<Props> = ({ text }) => {
         <TwitterIcon size={32} round />
       </a>
       <a
-        href={`https://www.facebook.com/sharer/sharer.php?u=https://eddyvinck.com/&quote=${text}`}
+        href={`https://www.facebook.com/sharer/sharer.php?u=https://devquotes.vercel.app/&quote=${text}`}
         target="_blank"
         rel="noreffer noopener noreferrer"
       >
