@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { useQuery } from "react-query";
 import { QuoteData } from "../../pages/api/quote";
 import { QuoteControls } from "../QuoteControls/QuoteControls";
+import { QuoteLikes } from "../QuoteLikes/QuoteLikes";
 import { QuoteSocialSharing } from "../QuoteSocialSharing/QuoteSocialSharing";
 import { getQuote } from "./getQuote";
 import { QuoteError } from "./QuoteError";
@@ -26,13 +27,14 @@ export const Quote: React.FC = () => {
   if (status === "loading") return <QuoteLoading />;
   if (status === "error" || (data && data.error)) return <QuoteError />;
   if (status === "success" && data) {
-    const { quote, author } = data as QuoteData;
+    const { quote, author, id } = data as QuoteData;
     const sharingText = getSharingText(quote, author);
 
     return (
       <div>
         <QuoteText quote={quote} author={author} />
         <QuoteControls fetchNewQuote={fetchNewQuote} />
+        <QuoteLikes quoteId={id} />
         <h2>Share on social media</h2>
         <QuoteSocialSharing text={sharingText} />
       </div>

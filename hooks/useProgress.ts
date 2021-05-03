@@ -56,6 +56,7 @@ export function useProgress(
       const timerInterval = 50;
       const shouldSetNewInterval =
         isEnabled && isTimerRunning && timeLeftIntervalRef.current === -1;
+
       if (shouldSetNewInterval) {
         timeLeftIntervalRef.current = window.setInterval(() => {
           if (isTimerRunning) {

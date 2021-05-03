@@ -1,7 +1,7 @@
 import React from "react";
 import { useProgress } from "../../hooks/useProgress";
-import styles from "./QuoteControls.module.css";
 import { QuoteProgress } from "../QuoteProgress/QuoteProgress";
+import styles from "./QuoteControls.module.css";
 
 interface Props {
   fetchNewQuote: () => void;
